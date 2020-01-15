@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "unicornflix",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authunicornflix1c564f62",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

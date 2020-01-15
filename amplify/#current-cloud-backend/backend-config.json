@@ -1,0 +1,50 @@
+{
+	"auth": {
+		"unicornflix1c564f62": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		},
+		"userPoolGroups": {
+			"service": "Cognito-UserPool-Groups",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "auth",
+					"resourceName": "unicornflix1c564f62",
+					"attributes": [
+						"UserPoolId",
+						"AppClientIDWeb",
+						"AppClientID",
+						"IdentityPoolId"
+					]
+				}
+			]
+		}
+	},
+	"api": {
+		"unicornflix": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authunicornflix1c564f62"
+						}
+					}
+				}
+			}
+		}
+	},
+	"video": {
+		"unicornflix": {
+			"service": "video",
+			"serviceType": "video-on-demand",
+			"providerPlugin": "awscloudformation",
+			"sha": "ddd17ff77776fb98c6ed3e6aeae0e3db6eabd559"
+		}
+	}
+}
